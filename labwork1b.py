@@ -23,35 +23,24 @@ def input_courses():
 def list_students():
     print("\n=== STUDENTS ===")
     for student in students:
-        print(
-            student[0],
-            student[1],
-            student[2]
-        )
+        print(student[0], student[1], student[2])
+    input("\nPress Enter...")
 def list_courses():
     print("\n=== COURSES ===")
     for course in courses:
-        print(
-            course[0],
-            course[1]
-        )
+        print(course[0], course[1])
+    input("\nPress Enter...")
 def input_marks():
-    list_courses()
-    course_id = input("\nEnter course ID: ")
-    if course_id not in marks:
+    for course in courses:
+        course_id = course[0]
         marks[course_id] = {}
-    for student in students:
-        score = float(
-            input(
-                f"Mark for {student[1]}: "
-            )
-        )
-        marks[course_id][student[0]] = score
-    print("Marks saved.")
+        print("\nCourse:", course[1])
+        for student in students:
+            score = float(input(f"Mark for {student[1]}: "))
+            marks[course_id][student[0]] = score
+    print("\nAll marks saved.")
 def show_marks():
-    course_id = input(
-        "\nEnter course ID: "
-    )
+    course_id = input("\nEnter course ID: ")
     if course_id not in marks:
         print("No marks for this course.")
         return
@@ -59,27 +48,22 @@ def show_marks():
     for student in students:
         student_id = student[0]
         if student_id in marks[course_id]:
-            print(
-                student[1],
-                marks[course_id][student_id]
-            )
+            print(student[1], marks[course_id][student_id])
 input_students()
 input_courses()
+input_marks()
 while True:
     print("\n===== MENU =====")
     print("1. List students")
     print("2. List courses")
-    print("3. Input marks")
-    print("4. Show marks")
-    print("5. Exit")
+    print("3. Show marks")
+    print("4. Exit")
     choice = input("Choose: ")
     if choice == "1":
         list_students()
     elif choice == "2":
         list_courses()
     elif choice == "3":
-        input_marks()
-    elif choice == "4":
         show_marks()
-    elif choice == "5":
+    elif choice == "4":
         break
